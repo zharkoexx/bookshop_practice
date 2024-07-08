@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--    <link rel="stylesheet" href="/static/css/styles.css">-->
+    <title>Book Store</title>
+    <style>
+        body {
+            font-family: 'Hind', sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #4d5974;
+        }
+
+        .books {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .book-card {
+            background: #fff;
+            border: 1px solid #e5e5e5;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 48%;
+            margin-bottom: 20px;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .book-image {
+            width: 30%;
+            height: auto;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            max-height: 200px;
+        }
+
+        .book-details {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .book-title {
+            font-size: 1.2rem;
+            color: #4d5974;
+            margin-bottom: 10px;
+        }
+
+        .book-author {
+            font-size: 1rem;
+            color: #7288a2;
+            margin-bottom: 10px;
+        }
+
+        .book-description {
+            font-size: 0.9rem;
+            color: #333;
+            margin-bottom: 10px;
+            line-height: 1.4;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3; /* Limit to 3 lines */
+            -webkit-box-orient: vertical;
+        }
+
+        .book-price {
+            font-size: 1rem;
+            color: #3e2093;
+            margin-bottom: 10px;
+        }
+
+        .add-to-cart {
+            align-self: flex-end;
+            background: #3e2093;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background: #028c9c;
+        }
+
+        @media (max-width: 768px) {
+            .book-card {
+                width: 100%;
+            }
+        }
+
+        header {
+            background-color: #fff;
+            color: #000;
+            padding: 10px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 5px auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3e2093;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-right: 20px;
+        }
+
+        .nav-links a {
+            color: #000;
+            padding: 10px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links a:hover {
+            background-color: #3e2093;
+            border-radius: 4px;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <div class="logo">
+            BookShop.kz
+        </div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/cart">Cart</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="container">
+    <h1>Book Store</h1>
+    <div class="books">
+        {{range .}}
+        <div class="book-card">
+            <img class="book-image" src="{{.VolumeInfo.ImageLinks.Thumbnail}}" alt="{{.VolumeInfo.Title}}">
+            <div class="book-details">
+                <h2 class="book-title">{{.VolumeInfo.Title}}</h2>
+                <p class="book-author"><strong>Author(s):</strong> {{range .VolumeInfo.Authors}}{{.}}, {{end}}</p>
+                <p class="book-description">{{.VolumeInfo.Description}}</p>
+                <p class="book-price">${{.SaleInfo.ListPrice.Amount}}</p>
+                <button class="add-to-cart" data-title="{{.VolumeInfo.Title}}" data-price="{{.SaleInfo.ListPrice.Amount}}">Add to Cart</button>
+            </div>
+        </div>
+        {{end}}
+    </div>
+</div>
+
+<script src="/static/js/script.js"></script>
+</body>
+</html>

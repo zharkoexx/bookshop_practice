@@ -1,0 +1,139 @@
+body {
+    font-family: 'Hind', sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #4d5974;
+}
+
+.books {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.book-card {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 48%;
+    margin-bottom: 20px;
+    display: flex;
+    overflow: hidden;
+}
+
+.book-image {
+    width: 150px;
+    object-fit: cover;
+}
+
+.book-details {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.book-title {
+    font-size: 1.2rem;
+    color: #4d5974;
+}
+
+.book-author {
+    font-size: 1rem;
+    color: #7288a2;
+}
+
+.book-price {
+    font-size: 1rem;
+    color: #3e2093;
+}
+
+.add-to-cart {
+    background: #3e2093;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.add-to-cart:hover {
+    background: #028c9c;
+}
+
+@media (max-width: 768px) {
+    .book-card {
+        width: 100%;
+    }
+}
+
+header {
+    background-color: #fff;
+    color: #000;
+    padding: 10px 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+}
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px auto;
+    padding: 0 20px;
+}
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #3e2093;
+}
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+.nav-links li {
+    margin-right: 20px;
+}
+.nav-links a {
+    color: #000;
+    padding: 10px;
+    font-weight: bold;
+    text-decoration: none;
+}
+.nav-links a:hover {
+    background-color: #3e2093;
+    border-radius: 4px;
+    color: #fff;
+}
+
+/*.book-description {*/
+/*    display: -webkit-box;*/
+/*    -webkit-line-clamp: 3;*/
+/*    -webkit-box-orient: vertical;*/
+/*    overflow: hidden;*/
+/*    text-overflow: ellipsis;*/
+/*    max-height: 4.5em; !* Adjust based on line-height *!*/
+/*    white-space: pre-wrap;*/
+/*}*/
+/*.book-details.expanded .book-description {*/
+/*    -webkit-line-clamp: unset;*/
+/*    max-height: none;*/
+/*}*/

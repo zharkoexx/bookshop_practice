@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Store</title>
+<!--    <link rel="stylesheet" href="/static/style.css">-->
+    <style>
+        /* Import Google font - Poppins */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        #contentbar {
+            padding-top: 30px; /* Добавьте достаточный отступ сверху для контента */
+        }
+
+        header {
+            background-color: #fff;
+            color: #000;
+            padding: 10px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 5px auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3e2093;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            margin-top: 5px;
+        }
+
+        .nav-links li {
+            margin-right: 20px;
+            margin-top: 5px;
+        }
+
+        .nav-links a {
+            color: #000;
+            padding: 10px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links a:hover {
+            background-color: #3e2093;
+            border-radius: 4px;
+            color: #fff;
+        }
+
+        body {
+            min-height: 100vh;
+            width: 100%;
+            background: rgba(163, 202, 252, 0.47);
+        }
+
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 430px;
+            width: 100%;
+            background: #fff;
+            border-radius: 7px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .container .registration {
+            display: none;
+        }
+
+        #check:checked ~ .registration {
+            display: block;
+        }
+
+        #check:checked ~ .login {
+            display: none;
+        }
+
+        #check {
+            display: none;
+        }
+
+        .container .form {
+            padding: 2rem;
+        }
+
+        .form input {
+            height: 60px;
+            width: 100%;
+            padding: 0 15px;
+            font-size: 17px;
+            margin-bottom: 1.3rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            outline: none;
+        }
+
+        .form input:focus {
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .form a {
+            font-size: 16px;
+            color: #301191;
+            text-decoration: none;
+        }
+
+        .form a:hover {
+            text-decoration: underline;
+        }
+
+        .form input.button {
+            color: #fff;
+            background: #a3cafc;
+            font-size: 1.2rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-top: 1.7rem;
+            cursor: pointer;
+            transition: 0.4s;
+        }
+
+        .form input.button:hover {
+            background: #006653;
+        }
+
+        .signup {
+            font-size: 17px;
+            text-align: center;
+        }
+
+        .signup label {
+            color: #009579;
+            cursor: pointer;
+        }
+
+        .signup label:hover {
+            text-decoration: underline;
+        }
+
+        /* Your existing styles for index.html */
+        #footer {
+            background-color: rgb(48, 17, 145);
+            color: #fff;
+            padding: 20px 0;
+        }
+
+        .book-section {
+            display: flex;
+            flex-wrap: nowrap; /* Ensures books stay in a single line */
+            overflow-x: auto; /* Allows horizontal scrolling if needed */
+            padding: 10px; /* Add some padding for better appearance */
+            gap: 20px; /* Space between books */
+        }
+
+        .book {
+            display: flex;
+            flex-direction: column;
+            width: 200px; /* Fixed width for each book */
+            text-align: center;
+            flex-shrink: 0; /* Prevents books from shrinking */
+        }
+
+        .book img {
+            width: 100%; /* Ensure images fill the width of the container */
+            height: 300px; /* Fixed height for images */
+            object-fit: cover; /* Ensure images cover the specified area */
+            border-radius: 5px; /* Optional: Add some border radius to images */
+        }
+
+        .book h3,
+        .book p,
+        .book button {
+            margin: 10px 0; /* Consistent spacing for elements */
+        }
+
+        .book button {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .book button:hover {
+            background-color: #0056b3;
+        }
+
+        .article form {
+            display: flex; /* Размещаем элементы формы в строку */
+            align-items: center; /* Выравниваем элементы по вертикали */
+        }
+
+        .article input[type="text"] {
+            height: 40px; /* Высота поля ввода */
+            padding: 0 10px; /* Отступы внутри поля ввода */
+            border: 1px solid #ccc; /* Граница поля ввода */
+            border-radius: 5px; /* Скругление углов поля ввода */
+            font-size: 16px; /* Размер шрифта */
+        }
+
+        .article button[type="submit"] {
+            height: 40px; /* Высота кнопки */
+            padding: 0 20px; /* Отступы внутри кнопки */
+            background-color: #007bff; /* Цвет фона кнопки */
+            color: white; /* Цвет текста */
+            border: none; /* Убираем границу */
+            border-radius: 5px; /* Скругление углов кнопки */
+            cursor: pointer; /* Изменяем курсор при наведении */
+            font-size: 16px; /* Размер шрифта */
+            transition: background-color 0.3s ease; /* Плавное изменение цвета фона */
+        }
+
+        .article button[type="submit"]:hover {
+            background-color: #0056b3; /* Изменение цвета фона при наведении */
+        }
+
+        #footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        #footer a:hover {
+            text-decoration: underline;
+        }
+
+        #footerblurb {
+            background-color: #f4f4f4;
+            padding: 20px 0;
+        }
+
+        #footerblurb-inner {
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-start;
+            padding: 0 20px;
+        }
+
+        #footerblurb-inner .column {
+            flex: 1;
+            padding: 10px;
+        }
+
+        #footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        #footer a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+
+        #content-inner {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+        }
+
+        #sidebar {
+            flex: 0 0 200px; /* Fixed width sidebar */
+            background-color: rgba(244, 244, 244, 0);
+            padding: 30px;
+            border-right: 1px solid #ccc;
+        }
+
+        #sidebar h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        #sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #sidebar ul li {
+            margin-bottom: 10px;
+        }
+
+        #sidebar ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            display: block;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        #sidebar ul li a:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+<div id="page">
+    <header>
+        <nav>
+            <div class="logo">
+                BookShop.kz
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/cart">Cart</a></li>
+                <div class="article">
+                    <form method="get" action="/search">
+                        <input type="text" name="query" placeholder="Search for books...">
+                        <button type="submit">Search</button>
+                    </form>
+                </div>
+            </ul>
+        </nav>
+    </header>
+    <div class="feature">
+        <div class="feature-inner">
+            <h1>Welcome to the Book Store</h1>
+        </div>
+    </div>
+    <div id="content">
+        <div id="content-inner">
+            <nav id="sidebar">
+                <div class="widget">
+                    <h3>Categories</h3>
+                    <ul>
+                        <li><a href="/fiction">Fiction</a></li>
+                        <li><a href="/nonfiction">Non-Fiction</a></li>
+                        <li><a href="/science">Science</a></li>
+                        <li><a href="/fantasy">Fantasy</a></li>
+                        <li><a href="/mystery">Mystery</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <main id="contentbar">
+                <div id="books">
+                    <!-- Best Sellers Section -->
+                    <h2>Best Sellers</h2>
+                    <div class="book-section" id="best-sellers">
+                        <div class="book">
+                            <img src="/images/mockin.jpg" alt="To Kill a Mockingbird">
+                            <h3>To Kill a Mockingbird</h3>
+                            <p><strong>Author:</strong> Harper Lee</p>
+                            <p><strong>Price:</strong> $7.99</p>
+                            <button onclick="addToCart('wF6qDgAAQBAJ')">Add to Cart</button>
+                        </div>
+                        <div class="book">
+                            <img src="/images/1984.png" alt="1984">
+                            <h3>1984</h3>
+                            <p><strong>Author:</strong> George Orwell</p>
+                            <p><strong>Price:</strong> $6.99</p>
+                            <button onclick="addToCart('RjsTAAAAYAAJ')">Add to Cart</button>
+                        </div>
+                        <div class="book">
+                            <img src="/images/gatsby.jpg" alt="The Great Gatsby">
+                            <h3>The Great Gatsby</h3>
+                            <p><strong>Author:</strong> F.  Fitzgerald</p>
+                            <p><strong>Price:</strong> $10.99</p>
+                            <button onclick="addToCart('RmQJzQEACAAJ')">Add to Cart</button>
+                        </div>
+                        <div class="book">
+                            <img src="/images/cathcer.jpg" alt="The Catcher in the Rye">
+                            <h3>The Catcher in  Rye</h3>
+                            <p><strong>Author:</strong> J.D. Salinger</p>
+                            <p><strong>Price:</strong> $8.99</p>
+                            <button onclick="addToCart('Kqr9oQEACAAJ')">Add to Cart</button>
+                        </div>
+                        <div class="book">
+                            <img src="/images/pride.jpg" alt="Pride and Prejudice">
+                            <h3>Pride and Prejudice</h3>
+                            <p><strong>Author:</strong> Jane Austen</p>
+                            <p><strong>Price:</strong> $5.99</p>
+                            <button onclick="addToCart('O2Pse7iPg3IC')">Add to Cart</button>
+                        </div>
+
+                        <div class="book">
+                            <img src="/images/emma.jpg" alt="The Great Gatsby">
+                            <h3>Emma</h3>
+                            <p><strong>Author:</strong> Jane Austen</p>
+                            <p><strong>Price:</strong> $8.99</p>
+                            <button onclick="addToCart('RmQJzQEACAAA')">Add to Cart</button>
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- Trending Now Section -->
+                    <h2>Trending Now</h2>
+                    <div class="book-section" id="trending-now">
+                        <div class="book">
+                            <img src="/images/hobbitt.jpg" alt="The Hobbit">
+                            <h3>The Hobbit</h3>
+                            <p><strong>Author:</strong> J.R.R. Tolkien</p>
+                            <p><strong>Price:</strong> $12.99</p>
+                            <button onclick="addToCart('wrOQLV6xB-wC')">Add to Cart</button>
+                        </div>
+                        <div class="book">
+                            <img src="/images/harryp.jpg" alt="Harry Potter and the Sorcerer's Stone">
+                            <h3>Harry Potter</h3>
+                            <p><strong>Author:</strong> J.K. Rowling</p>
+                            <p><strong>Price:</strong> $9.99</p>
+                            <button onclick="addToCart('nScKAQAAMAAJ')">Add to Cart</button>
+                        </div>
+                        <div class="book">
+                            <img src="/images/hungerg.jpg" alt="The Hunger Games">
+                            <h3>The Hunger Games</h3>
+                            <p><strong>Author:</strong> Suzanne Collins</p>
+                            <p><strong>Price:</strong> $8.99</p>
+                            <button onclick="addToCart('YyCzswEACAAJ')">Add to Cart</button>
+                        </div>
+                        <div class="book">
+                            <img src="/images/dune.jpg" alt="Dune">
+                            <h3>Dune</h3>
+                            <p><strong>Author:</strong> Frank Herbert</p>
+                            <p><strong>Price:</strong> $11.99</p>
+                            <button onclick="addToCart('O7lKMQAACAAJ')">Add to Cart</button>
+                        </div>
+                        <div class="book">
+                            <img src="/images/Alchemist.jpg" alt="The Alchemist">
+                            <h3>The Alchemist</h3>
+                            <p><strong>Author:</strong> Paulo Coelho</p>
+                            <p><strong>Price:</strong> $6.99</p>
+                            <button onclick="addToCart('pzPfpYz8hqAC')">Add to Cart</button>
+                        </div>
+                        <div class="book">
+                            <img src="/images/before.jpg" alt="The Fault in Our Stars">
+                            <h3>Before Sunrise</h3>
+                            <p><strong>Author:</strong> John Green</p>
+                            <p><strong>Price:</strong> $7.49</p>
+                            <button onclick="addToCart('J2qoAwAAQBAJ')">Add to Cart</button>
+                        </div>
+
+                    </div>
+                </div>
+            </main>
+<!--            <nav id="sidebar">-->
+<!--                <div class="widget">-->
+<!--                    <h3>Categories</h3>-->
+<!--                    <ul>-->
+<!--                        <li><a href="/fiction">Fiction</a></li>-->
+<!--                        <li><a href="/nonfiction">Non-Fiction</a></li>-->
+<!--                        <li><a href="/science">Science</a></li>-->
+<!--                        <li><a href="/fantasy">Fantasy</a></li>-->
+<!--                        <li><a href="/mystery">Mystery</a></li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </nav>-->
+            <div class="clr"></div>
+        </div>
+    </div>
+    <div id="footerblurb">
+        <div id="footerblurb-inner">
+            <div class="column">
+                <h2><span>Rebalance and reconnect with nature</span></h2>
+                <p>Rebalancing and reconnecting with nature is essential
+                    for maintaining mental and physical well-being. Spending
+                    time outdoors, whether hiking through lush forests, enjoying serene lakesides
+                    , or simply strolling in a local park,
+                    can rejuvenate the soul and provide a sense of peace and clarity
+                    . For tips on how to incorporate more nature into your daily life, explore resources like
+                    <a href="https://www.health.harvard.edu/mind-and-mood/sour-mood-getting-you-down-get-back-to-nature">this guide</a>.</p>
+
+            </div>
+            <div class="column">
+                <h2><span>100 books everyone should read</span></h2>
+                <p>Here are <a href="https://www.goodreads.com/list/show/1.Best_Books_Ever">100 books</a>
+                    that are often considered essential reads across
+                    various genres and time periods, encompassing classics and modern literature alike.</p>
+
+            </div>
+            <div class="column">
+                <h2><span>Just For the Summer</span></h2>
+                <p> <a href="https://www.goodreads.com/list/show/1.Best_Books_Ever">Just For the Summer</a> is a delightful read perfect for
+                    the season, capturing the essence of summer romance and adventure.</p>
+            </div>
+            <div class="clr"></div>
+        </div>
+    </div>
+    <footer id="footer">
+        <div id="footer-inner">
+            <p>&copy; Copyright <a href="#">Your Site</a> &#124; <a href="#">Terms of Use</a> &#124; <a href="#">Privacy Policy</a></p>
+            <div class="clr"></div>
+        </div>
+    </footer>
+</div>
+
+<script>
+    function addToCart(bookId) {
+        // Function to add book to cart
+        fetch(`/cart/add?bookId=${bookId}`, {
+            method: 'POST'
+        }).then(response => {
+            if (response.ok) {
+                alert('Book added to cart!');
+            } else {
+                alert('Failed to add book to cart.');
+            }
+        });
+    }
+</script>
+</body>
+</html>

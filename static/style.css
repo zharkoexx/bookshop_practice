@@ -1,0 +1,310 @@
+/* Import Google font - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+#contentbar {
+    padding-top: 30px; /* Добавьте достаточный отступ сверху для контента */
+}
+
+header {
+    background-color: #fff;
+    color: #000;
+    padding: 10px 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px auto;
+    padding: 0 20px;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #3e2093;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    margin-top: 5px;
+}
+
+.nav-links li {
+    margin-right: 20px;
+    margin-top: 5px;
+}
+
+.nav-links a {
+    color: #000;
+    padding: 10px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.nav-links a:hover {
+    background-color: #3e2093;
+    border-radius: 4px;
+    color: #fff;
+}
+
+body {
+    min-height: 100vh;
+    width: 100%;
+    background: rgba(163, 202, 252, 0.47);
+}
+
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 430px;
+    width: 100%;
+    background: #fff;
+    border-radius: 7px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.container .registration {
+    display: none;
+}
+
+#check:checked ~ .registration {
+    display: block;
+}
+
+#check:checked ~ .login {
+    display: none;
+}
+
+#check {
+    display: none;
+}
+
+.container .form {
+    padding: 2rem;
+}
+
+.form input {
+    height: 60px;
+    width: 100%;
+    padding: 0 15px;
+    font-size: 17px;
+    margin-bottom: 1.3rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    outline: none;
+}
+
+.form input:focus {
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.form a {
+    font-size: 16px;
+    color: #301191;
+    text-decoration: none;
+}
+
+.form a:hover {
+    text-decoration: underline;
+}
+
+.form input.button {
+    color: #fff;
+    background: #a3cafc;
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-top: 1.7rem;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.form input.button:hover {
+    background: #006653;
+}
+
+.signup {
+    font-size: 17px;
+    text-align: center;
+}
+
+.signup label {
+    color: #009579;
+    cursor: pointer;
+}
+
+.signup label:hover {
+    text-decoration: underline;
+}
+
+/* Your existing styles for index.html */
+#footer {
+    background-color: rgb(48, 17, 145);
+    color: #fff;
+    padding: 20px 0;
+}
+
+.book-section {
+    display: flex;
+    flex-wrap: nowrap; /* Ensures books stay in a single line */
+    overflow-x: auto; /* Allows horizontal scrolling if needed */
+    padding: 10px; /* Add some padding for better appearance */
+    gap: 20px; /* Space between books */
+}
+
+.book {
+    display: flex;
+    flex-direction: column;
+    width: 200px; /* Fixed width for each book */
+    text-align: center;
+    flex-shrink: 0; /* Prevents books from shrinking */
+}
+
+.book img {
+    width: 100%; /* Ensure images fill the width of the container */
+    height: 300px; /* Fixed height for images */
+    object-fit: cover; /* Ensure images cover the specified area */
+    border-radius: 5px; /* Optional: Add some border radius to images */
+}
+
+.book h3,
+.book p,
+.book button {
+    margin: 10px 0; /* Consistent spacing for elements */
+}
+
+.book button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.book button:hover {
+    background-color: #0056b3;
+}
+
+.article form {
+    display: flex; /* Размещаем элементы формы в строку */
+    align-items: center; /* Выравниваем элементы по вертикали */
+}
+
+.article input[type="text"] {
+    height: 40px; /* Высота поля ввода */
+    padding: 0 10px; /* Отступы внутри поля ввода */
+    border: 1px solid #ccc; /* Граница поля ввода */
+    border-radius: 5px; /* Скругление углов поля ввода */
+    font-size: 16px; /* Размер шрифта */
+}
+
+.article button[type="submit"] {
+    height: 40px; /* Высота кнопки */
+    padding: 0 20px; /* Отступы внутри кнопки */
+    background-color: #007bff; /* Цвет фона кнопки */
+    color: white; /* Цвет текста */
+    border: none; /* Убираем границу */
+    border-radius: 5px; /* Скругление углов кнопки */
+    cursor: pointer; /* Изменяем курсор при наведении */
+    font-size: 16px; /* Размер шрифта */
+    transition: background-color 0.3s ease; /* Плавное изменение цвета фона */
+}
+
+.article button[type="submit"]:hover {
+    background-color: #0056b3; /* Изменение цвета фона при наведении */
+}
+
+#footer a {
+    color: #fff;
+    text-decoration: none;
+}
+
+#footer a:hover {
+    text-decoration: underline;
+}
+
+#footerblurb {
+    background-color: #f4f4f4;
+    padding: 20px 0;
+}
+
+#footerblurb-inner {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding: 0 20px;
+}
+
+#footerblurb-inner .column {
+    flex: 1;
+    padding: 10px;
+}
+
+#footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+#footer a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+#content-inner {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+#sidebar {
+    flex: 0 0 200px; /* Fixed width sidebar */
+    background-color: rgba(244, 244, 244, 0);
+    padding: 30px;
+    border-right: 1px solid #ccc;
+}
+
+#sidebar h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+#sidebar ul li {
+    margin-bottom: 10px;
+}
+
+#sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    display: block;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+#sidebar ul li a:hover {
+    background-color: #ddd;
+}

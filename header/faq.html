@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frequently Asked Questions</title>
+    <link rel="stylesheet" href="contact.css">
+    <style>
+
+    </style>
+</head>
+<body>
+<header>
+    <nav>
+        <div class="logo">
+            BookShop.kz
+        </div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/cart">Cart</a></li>
+        </ul>
+    </nav>
+</header>
+<div class="container">
+    <h2>Frequently Asked Questions about Books</h2>
+    <div class="accordion">
+        <div class="accordion-item">
+            <button id="accordion-button-1" aria-expanded="false">
+                <span class="accordion-title">How do I choose the right book to read?</span>
+                <span class="icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion-content">
+                <p>Choosing the right book depends on your interests, genre preferences, and current reading goals. You can start by exploring reviews, recommendations from friends, or bestseller lists.</p>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <button id="accordion-button-2" aria-expanded="false">
+                <span class="accordion-title">What are some classic books everyone should read?</span>
+                <span class="icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion-content">
+                <p>Classic books like "To Kill a Mockingbird," "Pride and Prejudice," and "1984" offer timeless themes and insights into human nature. They are often recommended for their cultural and literary significance.</p>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <button id="accordion-button-3" aria-expanded="false">
+                <span class="accordion-title">How can I find books on a specific topic?</span>
+                <span class="icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion-content">
+                <p>You can find books on specific topics by using online bookstores, libraries, or specialized book review websites. Narrow down your search by using relevant keywords and filters.</p>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <button id="accordion-button-4" aria-expanded="false">
+                <span class="accordion-title">Where can I buy second-hand books?</span>
+                <span class="icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion-content">
+                <p>You can buy second-hand books from local thrift stores, online marketplaces like eBay or Amazon's used book section, or through book swaps and community events.</p>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <button id="accordion-button-5" aria-expanded="false">
+                <span class="accordion-title">How do I start my own book collection?</span>
+                <span class="icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion-content">
+                <p>Starting a book collection involves selecting books that you enjoy and want to keep for personal or professional reasons. Consider themes, genres, and editions that hold sentimental or educational value.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // JavaScript for accordion functionality
+    const items = document.querySelectorAll(".accordion button");
+
+    function toggleAccordion() {
+        const itemToggle = this.getAttribute('aria-expanded');
+
+        for (i = 0; i < items.length; i++) {
+            items[i].setAttribute('aria-expanded', 'false');
+        }
+
+        if (itemToggle == 'false') {
+            this.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    items.forEach(item => item.addEventListener('click', toggleAccordion));
+</script>
+</body>
+</html>

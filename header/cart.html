@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        /* Ваши дополнительные стили для страницы cart.html */
+        /* Примеры стилей для заголовков и таблицы */
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .total {
+            margin-top: 20px;
+            text-align: right;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+<div id="page">
+    <header>
+        <nav>
+            <div class="logo">
+                BookShop.kz
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/cart">Cart</a></li>
+                <div class="article">
+                    <form method="get" action="/search">
+                        <input type="text" name="query" placeholder="Search for books...">
+                        <button type="submit">Search</button>
+                    </form>
+                </div>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <h1>Shopping Cart</h1>
+            <table>
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Price</th>
+                </tr>
+                </thead>
+                <tbody id="cart-items">
+                <!-- Здесь будут отображаться элементы в корзине -->
+                </tbody>
+            </table>
+            <div class="total">
+                <strong>Total:</strong> $<span id="cart-total">0.00</span>
+            </div>
+        </div>
+    </main>
+    <footer id="footer">
+        <div id="footer-inner">
+            <p>&copy; Copyright <a href="#">Your Site</a> &#124; <a href="#">Terms of Use</a> &#124; <a href="#">Privacy Policy</a></p>
+            <div class="clr"></div>
+        </div>
+    </footer>
+</div>
+<script>
+    // JavaScript для загрузки книг в корзину и расчета общей суммы
+    document.addEventListener('DOMContentLoaded', function () {
+        fetchCartItems();
+    });
+
+    async function fetchCartItems() {
+        try {
+            const response = await fetch('/cart/items');
+            if (!response.ok) {
+                throw new Error('Failed to fetch cart items');
+            }
+            const items = await response.json();
+            displayCartItems(items);
+            calculateTotal(items);
+        } catch (error) {
+            console.error('Error fetching cart items:', error);
+        }
+    }
+
+    function displayCartItems(items) {
+        const cartItemsElement = document.getElementById('cart-items');
+        cartItemsElement.innerHTML = ''; // Очистить текущие элементы
+
+        items.forEach(item => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                    <td>${item.title}</td>
+                    <td>${item.author}</td>
+                    <td>$${item.price.toFixed(2)}</td>
+                `;
+            cartItemsElement.appendChild(row);
+        });
+    }
+
+    function calculateTotal(items) {
+        const total = items.reduce((acc, item) => acc + item.price, 0);
+        const totalElement = document.getElementById('cart-total');
+        totalElement.textContent = total.toFixed(2);
+    }
+</script>
+</body>
+</html>
